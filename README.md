@@ -1,5 +1,5 @@
 # Move Boi
-A simple 2D game made by Godot Engine. It's made with Godot 3.5 to be suitable for web export.
+A simple 2D game made with Godot Engine. It's made with Godot 3.5 to be suitable for web export.
 
 *Note: This is a demo project and may get updates.*
 
