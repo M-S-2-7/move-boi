@@ -136,10 +136,6 @@ anchor_bottom = 1.0
 [node name="StartScreen" type="ColorRect" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 173.0
-margin_top = 210.0
-margin_right = 173.0
-margin_bottom = 210.0
 color = Color( 0, 0, 0, 0.54902 )
 
 [node name="EnemyHappy" type="Sprite" parent="UI/StartScreen"]
