@@ -1,0 +1,264 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Assets/Titles.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/game.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/ShareButton.png" type="Texture" id=4]
+[ext_resource path="res://Assets/StartButton.png" type="Texture" id=5]
+[ext_resource path="res://Assets/3Dumb.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Assets/2Dumb.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Assets/EnemyHappy.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/arrows.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/cross.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/start.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Assets/move.mp3" type="AudioStream" id=12]
+
+[sub_resource type="TileSet" id=1]
+0/name = "Titles.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 448, 240 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 16, 16 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="DynamicFont" id=2]
+size = 80
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 29
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 22
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 80
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 29
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 26
+font_data = ExtResource( 7 )
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/GameUI/TimeLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "5" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UI/GameUI/TimeLabel:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "timer"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/GameUI/TimeLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "5", "4", "3", "2", "1", "0 " ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UI/GameUI/TimeLabel:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9, 1, 1.9, 2, 2.9, 3, 3.901, 4, 4.9, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ), Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ), Vector2( 0, 0 ), Vector2( 1, 1 ), Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ), Vector2( 0, 0 ), Vector2( 1, 1 ) ]
+}
+
+[node name="Game" type="Node"]
+script = ExtResource( 2 )
+enemyScene = ExtResource( 3 )
+arrowScene = ExtResource( 9 )
+crossScene = ExtResource( 10 )
+
+[node name="Map" type="TileMap" parent="."]
+visible = false
+scale = Vector2( 4, 4 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 196619, 1, 0, 196619, 2, 0, 196619, 3, 0, 196619, 4, 0, 196619, 5, 0, 196619, 6, 0, 196619, 7, 0, 196619, 65536, 0, 196619, 65537, 0, 196613, 65538, 0, 196613, 65539, 0, 196613, 65540, 0, 196613, 65541, 0, 196613, 65542, 0, 196613, 65543, 0, 196619, 131072, 0, 196619, 131073, 0, 196613, 131074, 0, 196613, 131075, 0, 196613, 131076, 0, 196613, 131077, 0, 196613, 131078, 0, 196613, 131079, 0, 196619, 196608, 0, 196619, 196609, 0, 196613, 196610, 0, 196613, 196611, 0, 196613, 196612, 0, 196613, 196613, 0, 196613, 196614, 0, 196613, 196615, 0, 196619, 262144, 0, 196619, 262145, 0, 196613, 262146, 0, 196613, 262147, 0, 196613, 262148, 0, 196613, 262149, 0, 196613, 262150, 0, 196613, 262151, 0, 196619, 327680, 0, 196619, 327681, 0, 196613, 327682, 0, 196613, 327683, 0, 196613, 327684, 0, 196613, 327685, 0, 196613, 327686, 0, 196613, 327687, 0, 196619, 393216, 0, 196619, 393217, 0, 196613, 393218, 0, 196613, 393219, 0, 196613, 393220, 0, 196613, 393221, 0, 196613, 393222, 0, 196613, 393223, 0, 196619, 458752, 0, 196619, 458753, 0, 196619, 458754, 0, 196619, 458755, 0, 196619, 458756, 0, 196619, 458757, 0, 196619, 458758, 0, 196619, 458759, 0, 196619 )
+
+[node name="UI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="StartScreen" type="ColorRect" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 173.0
+margin_top = 210.0
+margin_right = 173.0
+margin_bottom = 210.0
+color = Color( 0, 0, 0, 0.54902 )
+
+[node name="EnemyHappy" type="Sprite" parent="UI/StartScreen"]
+position = Vector2( 353, 228 )
+scale = Vector2( 0.07, 0.07 )
+texture = ExtResource( 8 )
+
+[node name="Name" type="Label" parent="UI/StartScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -180.0
+margin_top = -116.0
+margin_right = 167.0
+margin_bottom = -36.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "MoveBoi"
+
+[node name="InfoLink" type="LinkButton" parent="UI/StartScreen"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -30.0
+margin_right = 83.0
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "Info"
+underline = 1
+
+[node name="StartButton" type="TextureButton" parent="UI/StartScreen"]
+margin_left = 98.0
+margin_top = 189.0
+margin_right = 1279.0
+margin_bottom = 1937.0
+rect_scale = Vector2( 0.15, 0.15 )
+texture_normal = ExtResource( 5 )
+
+[node name="TextureButton" type="TextureButton" parent="UI/StartScreen"]
+margin_left = 294.0
+margin_top = 287.0
+margin_right = 1475.0
+margin_bottom = 2035.0
+rect_scale = Vector2( 0.08, 0.08 )
+texture_normal = ExtResource( 4 )
+
+[node name="PlaySound" type="CheckBox" parent="UI/StartScreen"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -129.0
+margin_top = -49.0
+custom_fonts/font = SubResource( 9 )
+pressed = true
+text = "Sounds"
+
+[node name="GameUI" type="Control" parent="UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TimeLabel" type="Label" parent="UI/GameUI"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -33.0
+margin_right = 33.0
+margin_bottom = 80.0
+rect_pivot_offset = Vector2( 32, 40 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "5"
+align = 1
+valign = 1
+
+[node name="ScoreUI" type="Label" parent="UI/GameUI"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "Score: 0"
+
+[node name="NextButton" type="Button" parent="UI/GameUI"]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -88.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 8 )
+text = "NEXT"
+
+[node name="SkipButton" type="Button" parent="UI/GameUI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -88.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 8 )
+text = "Skip"
+
+[node name="TimerAnimation" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 6 )
+anims/timer = SubResource( 7 )
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Crosses" type="Node" parent="."]
+
+[node name="Line" type="Line2D" parent="."]
+
+[node name="MoveSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+area_mask = 2
+
+[node name="StartSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 11 )
+
+[connection signal="pressed" from="UI/StartScreen/InfoLink" to="." method="_on_InfoLink_pressed"]
+[connection signal="pressed" from="UI/StartScreen/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="UI/StartScreen/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="UI/GameUI/NextButton" to="." method="_on_NextButton_pressed"]
+[connection signal="pressed" from="UI/GameUI/SkipButton" to="." method="_on_SkipButton_pressed"]
+[connection signal="animation_finished" from="TimerAnimation" to="." method="_on_TimerAnimation_animation_finished"]
